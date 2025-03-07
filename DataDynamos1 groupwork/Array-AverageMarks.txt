@@ -1,0 +1,50 @@
+/*1. Write a C program that calculates the average of marks got by a student in three subjects ie Physics, Chemistry, Math...assume for each subject, four different tests were conducted; assignment, Course work, mid term and end of term exams.*/
+
+#include <stdio.h>
+
+int main() {
+    //Declaring all variables
+    float PHY[4], CHEM[4], MTC[4];
+    float TOTAL_PHY=0, TOTAL_CHEM=0,TOTAL_MTC=0;
+    float AVG_PHY, AVG_CHEM, AVG_MTC, Overall_AVG;
+
+    const char *tests[] = {"assignment", "coursework", "mid-term", "end-of-term"};
+
+    //Entering marks for Physics
+    printf("Enter marks for Physics\n");
+    for (int i=0; i<4; i++){
+        printf("%s:",tests[i]);
+        scanf("%f",&PHY[i]);
+        TOTAL_PHY += PHY[i];
+    }
+    //printf("%.2f",TOTAL_PHY);
+
+    //Entering marks for chemistry
+    printf("\nEnter marks for chemistry\n");
+    for (int i=0; i<4; i++){
+        printf("%s:",tests[i]);
+        scanf("%f",&CHEM[i]);
+        TOTAL_CHEM += CHEM[i];
+    }
+    //printf("%.2f",TOTAL_CHEM);
+
+     //Entering marks for chemistry
+    printf("\nEnter marks for Mathmatics\n");
+    for (int i=0; i<4; i++){
+        printf("%s:",tests[i]);
+        scanf("%f",&MTC[i]);
+        TOTAL_MTC += MTC[i];
+    }
+    //printf("\n%.2f",TOTAL_MTC);
+
+    //All averages
+    AVG_PHY = TOTAL_PHY/4;
+    AVG_CHEM = TOTAL_CHEM/4;
+    AVG_MTC = TOTAL_MTC/4;
+
+   Overall_AVG= (AVG_PHY+AVG_CHEM+ AVG_MTC)/3;
+   printf("The Overall_AVG is %.2f\n",Overall_AVG);
+
+
+return 0;
+    }

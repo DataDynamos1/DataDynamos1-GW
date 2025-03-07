@@ -1,0 +1,44 @@
+/*2. Write a C program that accepts a group of N domestic animals and a group of X wild animals. Your program should print N + X animals after entering each group.*/
+
+#include <stdio.h>
+
+int main(){
+    // Declare array sizes
+    int N, X;
+
+    // Prompt user to enter the array sizes
+    printf("How many domestic animals do you know? ");
+    scanf("%d", &N);
+    printf("\nHow many wild animals do you know? ");
+    scanf("%d", &X);
+
+    // Declare arrays for storing the animal names
+    char domestic[N][50]; // Assuming max length of each name is 50 characters
+    char wild[X][50];
+
+    // Prompt user to enter the animal names
+    // Domestic animals
+    printf("Please enter %d domestic animals.\n", N);
+    for(int i = 0; i < N; i++){
+        printf("Animal%d: ", i + 1);
+        scanf("%s", domestic[i]);
+    }
+
+    // Wild animals
+    printf("Please enter %d wild animals.\n", X);
+    for(int i = 0; i < X; i++){
+        printf("Animal%d: ", i + 1);
+        scanf("%s", wild[i]);
+    }
+
+    // Print all animals
+    printf("Here are all the animals:\n");
+    for(int i = 0; i < N; ++i){
+        printf("%s\n", domestic[i]);
+    }
+    for(int i = 0; i < X; ++i){
+        printf("%s\n", wild[i]);
+    }
+
+    return 0;
+}
