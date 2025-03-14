@@ -26,3 +26,32 @@ It then creates two arrays to store the names of these animals. one array is for
 The program then prompts the user to input the names of the domestic animals and stores them in the first array. It does the same for wild animals and stores them in the second array.
 Lastly the program prints out all the names of the domestic and wild animals that the user entered.
 
+
+ALGORITHM FOR SWAPPING TWO NUMBERS.
+Write an algorithm to swap two numbers as entered by the user.
+STEP 1: START.
+STEP 2: input the first value as Val1.
+STEP 3: input the second value as Val2.
+STEP 4: print Val1 and Val2.
+STEP 5: swap the values by setting Val3 = Val1, Val1 = Val2, Val2 = Val3.
+STEP 6: print new swapped values of Val1 and Val2.
+STEP 7: STOP.
+
+
+PSEUDO CODE FOR SWAPPING TWO NUMBERS.
+Write a pseudo code that swaps two numbers.
+ALGORITHM Swap
+Declare val1, val2, val3;
+Input: Write "Enter first number: ";
+             Read val1;
+Input: Write "Enter second number: ";
+              Read val2;
+ Output: “write values of val1 and val2:  ” ,val1,val2;
+    // swap the numbers by setting val3 = val1, val1 = val2, val2 = val3.
+    val3 = val1;
+    val1 = val2;
+    val2 = val3;
+ Output: “write new swapped values of val1 and val2:  ” ,val1,val2;
+}
+
+
