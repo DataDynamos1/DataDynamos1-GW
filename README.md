@@ -28,7 +28,7 @@ Lastly the program prints out all the names of the domestic and wild animals tha
 
 
 ALGORITHM FOR SWAPPING TWO NUMBERS.
-Write an algorithm to swap two numbers as entered by the user.
+3. Write an algorithm to swap two numbers as entered by the user.
 STEP 1: START.
 STEP 2: input the first value as Val1.
 STEP 3: input the second value as Val2.
@@ -39,7 +39,7 @@ STEP 7: STOP.
 
 
 PSEUDO CODE FOR SWAPPING TWO NUMBERS.
-Write a pseudo code that swaps two numbers.
+4. Write a pseudo code that swaps two numbers.
 ALGORITHM Swap
 Declare val1, val2, val3;
 Input: Write "Enter first number: ";
