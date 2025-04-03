@@ -3,8 +3,8 @@
 
 int main() {
     // Declare stack variables
-    char stack[100][75]; // Array for storing names (stack implementation)
-    int top = 0;         // Stack pointer (tracks the top of the stack)
+    char stack[100][75]; // Array for storing names 
+    int top = 0;         // Stack pointer, tracks the top of the stack
 
     int num;
     printf("PLEASE ENTER THE NUMBER OF YOUR FRIENDS: \n");
@@ -15,7 +15,6 @@ int main() {
         scanf("%s", input);             // Take input as a string
         int valid = 1;                  // Flag to check if input is valid
 
-        // Manual digit checking
         for (int i = 0; input[i] != '\0'; i++) {
             if (input[i] < '0' || input[i] > '9') { // Check if character is not a digit
                 valid = 0;                         // If not, mark input as invalid
@@ -31,7 +30,7 @@ int main() {
             }
 
             if (num > 0) {              // Ensure the number is positive
-                break;                  // Exit loop for valid input
+                break;                 
             }
         }
 
@@ -40,12 +39,12 @@ int main() {
 
     printf("PLEASE ENTER THE NAMES OF YOUR FRIENDS\n");
 
-    // Loop to get the names and push them into the stack
+    // Loop to push names into the stack
     for (int i = 0; i < num; i++) {
-        if (top < 100) { // Ensure the stack doesn't overflow
+        if (top < 100) { 
             printf("Friend %d: ", i + 1);
-            scanf("%s", stack[top]); // Add name to the stack
-            top++;                   // Increment stack pointer
+            scanf("%s", stack[top]);
+            top++;                   
         } else {
             printf("Stack overflow! Cannot add more names.\n");
             break;
@@ -61,14 +60,14 @@ int main() {
         printf("3. PEEK AT THE TOP FRIEND\n");
         printf("4. EXIT\n");
         printf("Enter your choice (1, 2, 3, or 4): ");
-        scanf(" %c", &choice); // Note the space before %c to avoid newline issues
+        scanf(" %c", &choice); 
 
         switch (choice) {
             case '1': // Push a new friend
-                if (top < 100) { // Ensure the stack doesn't overflow
+                if (top < 100) { 
                     printf("Enter the name of your new friend: ");
-                    scanf("%s", stack[top]); // Add name to the stack
-                    top++;                   // Increment stack pointer
+                    scanf("%s", stack[top]);
+                    top++;                   
                     printf("Friend added successfully!\n");
                 } else {
                     printf("Stack overflow! Cannot add more names.\n");
@@ -76,8 +75,8 @@ int main() {
                 break;
 
             case '2': // Pop the top friend
-                if (top > 0) { // Ensure the stack is not empty
-                    top--; // Decrement the stack pointer to pop the top element
+                if (top > 0) { 
+                    top--; 
                     printf("The top friend '%s' has been removed from the stack.\n", stack[top]);
                 } else {
                     printf("Stack underflow! No friends left to remove.\n");
@@ -85,15 +84,15 @@ int main() {
                 break;
 
             case '3': // Peek at the top friend
-                if (top > 0) { // Ensure the stack is not empty
-                    printf("The top friend on the stack is '%s'.\n", stack[top - 1]); // Show top element
+                if (top > 0) { 
+                    printf("The top friend on the stack is '%s'.\n", stack[top - 1]); 
                 } else {
                     printf("Stack is empty! No friends to peek at.\n");
                 }
                 break;
 
             case '4': // Exit the program
-                printf("Exiting... Goodbye!\n");
+                printf("Exiting... \n");
                 break;
 
             default:
