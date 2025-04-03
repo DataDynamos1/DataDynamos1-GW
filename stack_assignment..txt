@@ -1,0 +1,112 @@
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+    // Declare stack variables
+    char stack[100][75]; // Array for storing names (stack implementation)
+    int top = 0;         // Stack pointer (tracks the top of the stack)
+
+    int num;
+    printf("PLEASE ENTER THE NUMBER OF YOUR FRIENDS: \n");
+
+    // Input validation for positive integer
+    while (1) { // Loop until valid input is provided
+        char input[100];                // Buffer to store the input as a string
+        scanf("%s", input);             // Take input as a string
+        int valid = 1;                  // Flag to check if input is valid
+
+        // Manual digit checking
+        for (int i = 0; input[i] != '\0'; i++) {
+            if (input[i] < '0' || input[i] > '9') { // Check if character is not a digit
+                valid = 0;                         // If not, mark input as invalid
+                break;
+            }
+        }
+
+        if (valid) {
+            num = 0; // Reset num for conversion
+            // Convert string to integer manually
+            for (int i = 0; input[i] != '\0'; i++) {
+                num = num * 10 + (input[i] - '0');
+            }
+
+            if (num > 0) {              // Ensure the number is positive
+                break;                  // Exit loop for valid input
+            }
+        }
+
+        printf("Invalid input! Please enter a positive integer: ");
+    }
+
+    printf("PLEASE ENTER THE NAMES OF YOUR FRIENDS\n");
+
+    // Loop to get the names and push them into the stack
+    for (int i = 0; i < num; i++) {
+        if (top < 100) { // Ensure the stack doesn't overflow
+            printf("Friend %d: ", i + 1);
+            scanf("%s", stack[top]); // Add name to the stack
+            top++;                   // Increment stack pointer
+        } else {
+            printf("Stack overflow! Cannot add more names.\n");
+            break;
+        }
+    }
+
+    // Allow the user to choose actions dynamically
+    char choice;
+    do {
+        printf("\nWHAT WOULD YOU LIKE TO DO?\n");
+        printf("1. PUSH A FRIEND ONTO THE STACK\n");
+        printf("2. POP A FRIEND FROM THE STACK\n");
+        printf("3. PEEK AT THE TOP FRIEND\n");
+        printf("4. EXIT\n");
+        printf("Enter your choice (1, 2, 3, or 4): ");
+        scanf(" %c", &choice); // Note the space before %c to avoid newline issues
+
+        switch (choice) {
+            case '1': // Push a new friend
+                if (top < 100) { // Ensure the stack doesn't overflow
+                    printf("Enter the name of your new friend: ");
+                    scanf("%s", stack[top]); // Add name to the stack
+                    top++;                   // Increment stack pointer
+                    printf("Friend added successfully!\n");
+                } else {
+                    printf("Stack overflow! Cannot add more names.\n");
+                }
+                break;
+
+            case '2': // Pop the top friend
+                if (top > 0) { // Ensure the stack is not empty
+                    top--; // Decrement the stack pointer to pop the top element
+                    printf("The top friend '%s' has been removed from the stack.\n", stack[top]);
+                } else {
+                    printf("Stack underflow! No friends left to remove.\n");
+                }
+                break;
+
+            case '3': // Peek at the top friend
+                if (top > 0) { // Ensure the stack is not empty
+                    printf("The top friend on the stack is '%s'.\n", stack[top - 1]); // Show top element
+                } else {
+                    printf("Stack is empty! No friends to peek at.\n");
+                }
+                break;
+
+            case '4': // Exit the program
+                printf("Exiting... Goodbye!\n");
+                break;
+
+            default:
+                printf("Invalid choice! Please enter 1, 2, 3, or 4.\n");
+                break;
+        }
+
+        // Display updated list of friends after any action
+        printf("\nUPDATED NAMES OF YOUR FRIENDS:\n");
+        for (int i = 0; i < top; i++) {
+            printf("Friend %d: %s\n", i + 1, stack[i]);
+        }
+    } while (choice != '4'); // Repeat until the user chooses to exit
+
+    return 0;
+}
