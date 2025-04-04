@@ -1,0 +1,111 @@
+//QN. Write a C/C++ code showing how to delete an element from different positions (beginning, middle, and end) of an array
+
+//CODE METHOD 1;
+
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+    // num is the number of friends
+    int num;
+    printf("PLEASE ENTER THE NUMBER OF YOUR FRIENDS: \n");
+    scanf("%d", &num);
+
+    // Declare an array to store the names of your friends
+    char friends[num][75];
+
+    printf("PLEASE ENTER THE NAMES OF YOUR FRIENDS\n");
+
+    // Loop to get the names of friends
+    for (int i = 0; i < num; i++) {
+        printf("Friend %d: ", i + 1);
+        scanf("%s", friends[i]);
+    }
+
+    // Ask the user which position to delete (beginning, middle, or end)
+    int choice;
+    printf("\nPLEASE CHOOSE THE POSITION TO DELETE:\n");
+    printf("1. Beginning\n2. Middle\n3. End\n");
+    scanf("%d", &choice);
+
+    if (choice == 1) {
+        // Delete the element at the beginning
+        for (int i = 0; i < num - 1; i++) {
+            strcpy(friends[i], friends[i + 1]);
+        }
+        num--; // Reduce the number of elements
+        printf("\nELEMENT AT THE BEGINNING HAS BEEN DELETED.\n");
+    } else if (choice == 2) {
+        // Delete the element at the middle
+        int middleIndex = num / 2;
+        for (int i = middleIndex; i < num - 1; i++) {
+            strcpy(friends[i], friends[i + 1]);
+        }
+        num--; // Reduce the number of elements
+        printf("\nELEMENT IN THE MIDDLE HAS BEEN DELETED.\n");
+    } else if (choice == 3) {
+        // Delete the element at the end
+        num--; // Simply reduce the number of elements
+        printf("\nELEMENT AT THE END HAS BEEN DELETED.\n");
+    } else {
+        printf("\nINVALID CHOICE.\n");
+    }
+
+    // Print all the friends' names after deletion
+    printf("\nTHE NAMES OF YOUR FRIENDS AFTER DELETION ARE:\n");
+    for (int i = 0; i < num; i++) {
+        printf("Friend %d: %s\n", i + 1, friends[i]);
+    }
+
+    return 0;
+}
+
+//CODE METHOD 2;
+
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+    // num is the number of friends
+    int num;
+    printf("PLEASE ENTER THE NUMBER OF YOUR FRIENDS: \n");
+    scanf("%d", &num);
+
+    // Declare an array to store the names of your friends
+    char friends[num][75];
+
+    printf("PLEASE ENTER THE NAMES OF YOUR FRIENDS\n");
+
+    // Loop to get the names of friends
+    for (int i = 0; i < num; i++) {
+        printf("Friend %d: ", i + 1);
+        scanf("%s", friends[i]);
+    }
+
+    // Ask the user for the exact position to delete
+    int position;
+    printf("\nPLEASE ENTER THE EXACT POSITION TO DELETE (1 TO %d): ", num);
+    scanf("%d", &position);
+
+    // Validate the position
+    if (position < 1 || position > num) {
+        printf("\nINVALID POSITION. PLEASE TRY AGAIN.\n");
+        return 1; // Exit the program if the position is invalid
+    }
+
+    // Perform the deletion by shifting elements
+    for (int i = position - 1; i < num - 1; i++) {
+        strcpy(friends[i], friends[i + 1]);
+    }
+
+    num--; // Reduce the number of elements
+
+    // Print all the friends' names after deletion
+    printf("\nTHE NAMES OF YOUR FRIENDS AFTER DELETION ARE:\n");
+    for (int i = 0; i < num; i++) {
+        printf("Friend %d: %s\n", i + 1, friends[i]);
+    }
+
+    return 0;
+}
+

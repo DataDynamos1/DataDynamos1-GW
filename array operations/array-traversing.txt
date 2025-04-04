@@ -1,0 +1,29 @@
+//QN. Write a C/C++/Java code showing how to traverse an array
+
+#include <stdio.h>
+
+int main(){
+    // num is the number of friends (upper bound)
+    int num;
+    printf("PLEASE ENTER THE NUMBER OF YOUR FRIENDS: \n");
+    scanf("%d", &num);
+
+    // Declare an array to store the names of your friends
+    char friends[num][75];
+
+    printf("PLEASE ENTER THE NAMES OF YOUR FRIENDS\n");
+
+    // Loop to get the names of friends
+    for (int i = 0; i < num; i++) {
+        printf("Friend %d: ", i + 1);
+        scanf("%s", friends[i]);
+    }
+
+    // Print all the friends' names
+    printf("\nTHE NAMES OF YOUR FRIENDS ARE:\n");
+    for (int i = 0; i < num; i++) {
+        printf("Friend %d: %s\n", i + 1, friends[i]);
+    }
+
+    return 0;
+}

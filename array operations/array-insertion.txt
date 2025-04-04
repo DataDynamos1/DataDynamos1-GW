@@ -1,0 +1,45 @@
+//QN. Write a C/C++/Java code showing how to insert an element entered by the user into the middle of array.
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+    // num is the number of friends (upper bound)
+    int num;
+    printf("PLEASE ENTER THE NUMBER OF YOUR FRIENDS: \n");
+    scanf("%d", &num);
+
+    // Declare an array to store the names of your friends
+    char friends[num + 1][75]; // Add an extra space for the new element
+
+    printf("PLEASE ENTER THE NAMES OF YOUR FRIENDS\n");
+
+    // Loop to get the names of friends
+    for (int i = 0; i < num; i++) {
+        printf("Friend %d: ", i + 1);
+        scanf("%s", friends[i]);
+    }
+
+    // Ask the user for the name to insert
+    char newFriend[75];
+    printf("\nPLEASE ENTER THE NAME OF THE FRIEND TO INSERT INTO THE MIDDLE: ");
+    scanf("%s", newFriend);
+
+    // Calculate the index to insert at (middle of the array)
+    int middleIndex = num / 2;
+
+    // Shift elements to make space for the new element
+    for (int i = num; i > middleIndex; i--) {
+        strcpy(friends[i], friends[i - 1]);
+    }
+
+    // Insert the new friend at the middle
+    strcpy(friends[middleIndex], newFriend);
+
+    // Print all the friends' names after insertion
+    printf("\nTHE NAMES OF YOUR FRIENDS AFTER INSERTION ARE:\n");
+    for (int i = 0; i <= num; i++) {
+        printf("Friend %d: %s\n", i + 1, friends[i]);
+    }
+
+    return 0;
+}
