@@ -1,57 +1,89 @@
-#include <stdio.h>
-#include <string.h>
+/*
+● Create a stack of friends whose names are captured from the user keyboard. Your program should be dynamic enough.
+Write C/C++ code showing how to push an element into a stack 
+Write C/C++ code showing how to pop a stack
+Write C/C++ code showing how to peek a stack
+*/
 
+#include <stdio.h>
 int main() {
     // Declare stack variables
-    char stack[100][75]; // Array for storing names 
-    int top = 0;         // Stack pointer, tracks the top of the stack
-
+    char stack[100][40]; 
+    int top = -1;       
+    int max = 100;       // Maximum number of elements in the stack
     int num;
-    printf("PLEASE ENTER THE NUMBER OF YOUR FRIENDS: \n");
+    char temp[100]; // Temporary string for validation
 
-    // Input validation for positive integer
-    while (1) { // Loop until valid input is provided
-        char input[100];                // Buffer to store the input as a string
-        scanf("%s", input);             // Take input as a string
-        int valid = 1;                  // Flag to check if input is valid
+    // Validate the number of friends input
+    while (1) {
+        printf("PLEASE ENTER THE NUMBER OF YOUR FRIENDS: \n");
+        scanf("%s", temp);
 
-        for (int i = 0; input[i] != '\0'; i++) {
-            if (input[i] < '0' || input[i] > '9') { // Check if character is not a digit
-                valid = 0;                         // If not, mark input as invalid
+        int valid = 1;
+        for (int i = 0; temp[i] != '\0'; i++) {
+            if (temp[i] < '0' || temp[i] > '9') {
+                valid = 0;
                 break;
             }
         }
 
         if (valid) {
-            num = 0; // Reset num for conversion
-            // Convert string to integer manually
-            for (int i = 0; input[i] != '\0'; i++) {
-                num = num * 10 + (input[i] - '0');
-            }
-
-            if (num > 0) {              // Ensure the number is positive
-                break;                 
-            }
+            sscanf(temp, "%d", &num);
+            break;
+        } else {
+            printf("Invalid input! Please enter a valid number.\n");
         }
-
-        printf("Invalid input! Please enter a positive integer: ");
     }
+
+    // Clear input buffer
+    while (getchar() != '\n');
 
     printf("PLEASE ENTER THE NAMES OF YOUR FRIENDS\n");
 
-    // Loop to push names into the stack
+    // Loop to push names onto the stack
     for (int i = 0; i < num; i++) {
-        if (top < 100) { 
-            printf("Friend %d: ", i + 1);
-            scanf("%s", stack[top]);
-            top++;                   
-        } else {
+        if (top == max - 1) { 
             printf("Stack overflow! Cannot add more names.\n");
             break;
+        } else {
+            top++;
+            while (1) {
+                int valid = 1;
+                int containsAlpha = 0;
+                printf("Friend %d: ", i + 1);
+                fgets(stack[top], sizeof(stack[top]), stdin);
+
+                // Remove newline character manually
+                int j = 0;
+                while (stack[top][j] != '\0') {
+                    if (stack[top][j] == '\n') {
+                        stack[top][j] = '\0';
+                        break;
+                    }
+                    j++;
+                }
+
+                // Validate name: ensure alphabetic characters and spaces
+                for (j = 0; stack[top][j] != '\0'; j++) {
+                    if ((stack[top][j] >= 'A' && stack[top][j] <= 'Z') ||
+                        (stack[top][j] >= 'a' && stack[top][j] <= 'z')) {
+                        containsAlpha = 1;
+                    } else if (!(stack[top][j] == ' ')) {
+                        valid = 0;
+                        break;
+                    }
+                }
+
+                if (valid && containsAlpha) {
+                    break;
+                } else {
+                    printf("Invalid name! Please enter a valid name with letters and spaces only.\n");
+                }
+            }
         }
     }
 
-    // Allow the user to choose actions dynamically
+    // User menu to perform stack operations
     char choice;
     do {
         printf("\nWHAT WOULD YOU LIKE TO DO?\n");
@@ -60,34 +92,68 @@ int main() {
         printf("3. PEEK AT THE TOP FRIEND\n");
         printf("4. EXIT\n");
         printf("Enter your choice (1, 2, 3, or 4): ");
-        scanf(" %c", &choice); 
+        scanf(" %c", &choice);
+
+        // Clear input buffer
+        while (getchar() != '\n');
 
         switch (choice) {
             case '1': // Push a new friend
-                if (top < 100) { 
-                    printf("Enter the name of your new friend: ");
-                    scanf("%s", stack[top]);
-                    top++;                   
-                    printf("Friend added successfully!\n");
-                } else {
+                if (top == max - 1) { 
                     printf("Stack overflow! Cannot add more names.\n");
+                } else {
+                    top++;
+                    while (1) {
+                        int valid = 1;
+                        int containsAlpha = 0;
+                        printf("Enter the name of your new friend: ");
+                        fgets(stack[top], sizeof(stack[top]), stdin);
+
+                        // Remove newline character manually
+                        int j = 0;
+                        while (stack[top][j] != '\0') {
+                            if (stack[top][j] == '\n') {
+                                stack[top][j] = '\0';
+                                break;
+                            }
+                            j++;
+                        }
+
+                        // Validate name: ensure alphabetic characters and spaces
+                        for (j = 0; stack[top][j] != '\0'; j++) {
+                            if ((stack[top][j] >= 'A' && stack[top][j] <= 'Z') ||
+                                (stack[top][j] >= 'a' && stack[top][j] <= 'z')) {
+                                containsAlpha = 1;
+                            } else if (!(stack[top][j] == ' ')) {
+                                valid = 0;
+                                break;
+                            }
+                        }
+
+                        if (valid && containsAlpha) {
+                            printf("Friend added successfully!\n");
+                            break;
+                        } else {
+                            printf("Invalid name! Please enter a name with letters and spaces only.\n");
+                        }
+                    }
                 }
                 break;
 
             case '2': // Pop the top friend
-                if (top > 0) { 
-                    top--; 
-                    printf("The top friend '%s' has been removed from the stack.\n", stack[top]);
-                } else {
+                if (top == -1) {
                     printf("Stack underflow! No friends left to remove.\n");
+                } else {
+                    printf("The top friend '%s' has been removed from the stack.\n", stack[top]);
+                    top--;
                 }
                 break;
 
             case '3': // Peek at the top friend
-                if (top > 0) { 
-                    printf("The top friend on the stack is '%s'.\n", stack[top - 1]); 
-                } else {
+                if (top == -1) {
                     printf("Stack is empty! No friends to peek at.\n");
+                } else {
+                    printf("The top friend on the stack is '%s'.\n", stack[top]);
                 }
                 break;
 
@@ -102,10 +168,10 @@ int main() {
 
         // Display updated list of friends after any action
         printf("\nUPDATED NAMES OF YOUR FRIENDS:\n");
-        for (int i = 0; i < top; i++) {
+        for (int i = 0; i <= top; i++) {
             printf("Friend %d: %s\n", i + 1, stack[i]);
         }
-    } while (choice != '4'); // Repeat until the user chooses to exit
+    } while (choice != '4');
 
     return 0;
 }
